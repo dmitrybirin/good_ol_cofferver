@@ -1,11 +1,15 @@
-const Koa = require('koa');
-const app = new Koa();
+const Koa = require('koa')
+const err = require('./middlewares/error')
 
+const app = new Koa()
 const port = 3000
 
+app.use(err);
+
 app.use(async ctx => {
-  ctx.body = 'Hello World';
-});
+  throw new Error('')
+  ctx.body = 'Hello World'
+})
 
 console.log(`Listen to the port ${port}`)
-app.listen(port);
+app.listen(port)
