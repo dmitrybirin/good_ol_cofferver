@@ -16,9 +16,9 @@ console.log(`Listen to the port ${port}`)
 const server = app.listen(port)
 
 process.on('SIGTERM', () => {
-    console.info('SIGTERM signal received.');
+    console.info('SIGTERM signal received.')
     server.close(() => {
-      console.log('Http server closed.');
-    });
-  });
+      console.log('Http server closed.')
+    })
+})
 
