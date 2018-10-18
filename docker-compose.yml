@@ -18,9 +18,9 @@ services:
       - ./:/app
     working_dir: "/app"
     command: "yarn start"
-    depends_on:
+    depends_on: 
       - mysql
-networks:
-  web:
-    external:
-      name: web-network
+    environment:
+      - DB_HOST=localhost
+      - DB_USER=test
+      - DB_PASS=testdev
