@@ -21,6 +21,6 @@ services:
     depends_on: 
       - mysql
     environment:
-      - DB_HOST=localhost
+      - DB_HOST=mysql
       - DB_USER=test
       - DB_PASS=testdev
