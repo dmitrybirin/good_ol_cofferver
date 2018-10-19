@@ -1,3 +1,6 @@
+CREATE DATABASE coffee;
+USE coffee;
+
 CREATE TABLE IF NOT EXISTS wheels (
     id INT AUTO_INCREMENT,
     sweet INT NOT NULL,
@@ -19,12 +22,12 @@ CREATE TABLE IF NOT EXISTS wheels (
     PRIMARY KEY (id)
 )  ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS wheels (
+CREATE TABLE IF NOT EXISTS cups (
     id INT AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
     date DATE,
     description TEXT,
     wheel_id INT,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
     FOREIGN KEY(wheel_id) REFERENCES wheels(id)
 )  ENGINE=INNODB;
