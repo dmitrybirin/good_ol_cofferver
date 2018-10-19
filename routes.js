@@ -2,6 +2,8 @@ const Router = require('koa-router')
 
 const router = new Router()
 
+const coffee = require('./database/coffee')
+
 router
 .get('/health', async (ctx) => {
     ctx.body = {
@@ -11,10 +13,7 @@ router
 })
 .post('/coffee/:id', async (ctx) => {
     console.log(ctx.params.id, ctx.request);
-    ctx.body = {
-        status: 'ok',
-        data: `I've got this: ${JSON.stringify(ctx.request.body)}`,
-    }
+    coffee.addCoffee(ctx.request.body)
 
 })
 
