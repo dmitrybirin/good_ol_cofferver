@@ -1,8 +1,10 @@
 const db = require('./index')
 
-const addCoffee = async (coffee) => {
+const addCoffee = async coffee => {
 	// this is MADNESS
-	const keys = Object.keys(coffee.wheel).map(taste => taste.replace('/','_').replace(' ','_')).join(', ')
+	const keys = Object.keys(coffee.wheel)
+		.map(taste => taste.replace('/', '_').replace(' ', '_'))
+		.join(', ')
 	const values = Object.values(coffee.wheel).join(', ')
 
 	await db.use('coffee')
@@ -14,5 +16,5 @@ const addCoffee = async (coffee) => {
 	console.log(res)
 }
 module.exports = {
-	addCoffee
+	addCoffee,
 }
