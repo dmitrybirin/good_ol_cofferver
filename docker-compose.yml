@@ -24,3 +24,4 @@ services:
       - DB_HOST=mysql
       - DB_USER=test
       - DB_PASS=testdev
+      - ORIGIN=http://localhost:8080
