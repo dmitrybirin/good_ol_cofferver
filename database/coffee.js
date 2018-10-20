@@ -11,7 +11,9 @@ const addCoffee = async coffee => {
 
 	const res = await db.transaction([
 		`INSERT INTO wheels (${keys}) VALUES (${values});`,
-		`INSERT INTO cups (title, date, description, wheel_id) VALUES ('a', '1997-06-10','c',LAST_INSERT_ID());`,
+		`INSERT INTO cups (title, date, description, wheel_id) VALUES (${
+			coffee.cup.title ? coffee.cup.title : "''"
+		}, NOW(),'',LAST_INSERT_ID());`,
 	])
 	console.log(res)
 }
