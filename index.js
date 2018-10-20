@@ -19,7 +19,7 @@ const server = app.listen(port)
 process.on('SIGTERM', () => {
     console.info('SIGTERM signal received.')
     console.log('Closing db connection')
-    db.end()
+    db.connection.end()
     server.close(() => {
       console.log('Http server closed.')
     })
