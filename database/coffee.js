@@ -1,10 +1,11 @@
 const db = require('./index')
 
 const addCoffee = async (coffee) => {
+	// this is MADNESS
 	const keys = Object.keys(coffee.wheel).map(taste => taste.replace('/','_').replace(' ','_')).join(', ')
 	const values = Object.values(coffee.wheel).join(', ')
 
-	await db.query(`USE coffee;`)
+	await db.use('coffee')
 
 	const res = await db.transaction([
 		`INSERT INTO wheels (${keys}) VALUES (${values});`,

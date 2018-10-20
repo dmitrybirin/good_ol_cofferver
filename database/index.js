@@ -30,6 +30,10 @@ class Database {
 
   rollback(err){ this.connection.rollback(() => Promise.reject(err))}
 
+  async use(){
+    await this.query(`USE coffee;`)
+  }
+
   query(query, transaction=false) {
     return new Promise((res, rej) => {
       this.connection.query(query, (err, results) => {
