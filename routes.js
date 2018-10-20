@@ -6,14 +6,19 @@ const coffee = require('./database/coffee')
 
 router
 	.get('/health', async ctx => {
+		ctx.status = 200
 		ctx.body = {
 			status: 'ok',
 			data: `I'm ok`,
 		}
 	})
-	.post('/coffee/:id', async ctx => {
-		console.log(ctx.params.id, ctx.request)
+	.post('/coffee', async ctx => {
 		coffee.addCoffee(ctx.request.body)
+		ctx.status = 204
+		ctx.body = {
+			status: 'ok',
+			data: `I'm ok`,
+		}
 	})
 
 module.exports = {
