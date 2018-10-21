@@ -12,12 +12,36 @@ router
 			data: `I'm ok`,
 		}
 	})
+	.get('/coffee', async ctx => {
+		try {
+			const result = await coffee.getCupList()
+			ctx.status = 200
+			ctx.body = {
+				status: 'ok',
+				data: result,
+			}
+		} catch (err) {
+			ctx.status = err.statusCode || err.status || 500
+			ctx.body = {
+				status: 'error',
+				message: err.message || 'unknown have thing just happened, bro:(',
+			}
+		}
+	})
 	.post('/coffee', async ctx => {
-		coffee.addCoffee(ctx.request.body)
-		ctx.status = 204
-		ctx.body = {
-			status: 'ok',
-			data: `I'm ok`,
+		try {
+			await coffee.addCoffee(ctx.request.body)
+			ctx.status = 204
+			ctx.body = {
+				status: 'ok',
+				data: `I'm ok`,
+			}
+		} catch (err) {
+			ctx.status = err.statusCode || err.status || 500
+			ctx.body = {
+				status: 'error',
+				message: err.message || 'unknown have thing just happened, bro:(',
+			}
 		}
 	})
 

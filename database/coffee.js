@@ -11,12 +11,18 @@ const addCoffee = async coffee => {
 
 	const res = await db.transaction([
 		`INSERT INTO wheels (${keys}) VALUES (${values});`,
-		`INSERT INTO cups (title, date, description, wheel_id) VALUES (${
+		`INSERT INTO cups (title, timestamp, description, wheel_id) VALUES (${
 			coffee.cup.title ? coffee.cup.title : "''"
-		}, NOW(),'',LAST_INSERT_ID());`,
+		}, '${coffee.cup.timestamp}','',LAST_INSERT_ID());`,
 	])
-	console.log(res)
 }
+
+const getCupList = async () => {
+	const res = await db.query(`SELECT title, timestamp, description FROM coffee.cups`)
+	return res
+}
+
 module.exports = {
 	addCoffee,
+	getCupList,
 }

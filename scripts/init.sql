@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS wheels (
 CREATE TABLE IF NOT EXISTS cups (
     id INT AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
-    date DATE,
+    timestamp timestamp,
     description TEXT,
     wheel_id INT,
     PRIMARY KEY (id),

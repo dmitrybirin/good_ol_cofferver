@@ -25,35 +25,60 @@ class Database {
 		})
 	}
 
-	rollback(err) {
-		this.connection.rollback(() => Promise.reject(err))
+	beginTransaction() {
+		return new Promise((res, rej) =>
+			this.connection.beginTransaction(err => {
+				console.log('Begin transaction')
+				if (err) rej(err)
+				else res()
+			})
+		)
+	}
+
+	rollback() {
+		console.log('Rollback...')
+		this.connection.rollback()
+	}
+
+	commit() {
+		console.log('Commiting...')
+		return new Promise((res, rej) =>
+			this.connection.commit(err => {
+				if (err) rej(err)
+				else res()
+			})
+		)
 	}
 
 	async use() {
 		await this.query(`USE coffee;`)
 	}
 
-	query(query, transaction = false) {
+	query(query) {
 		return new Promise((res, rej) => {
 			this.connection.query(query, (err, results) => {
-				if (err) transaction ? this.rollback(err) : rej(err)
+				if (err) rej(err)
 				else res(results)
 			})
 		})
 	}
 
 	async transaction(queryArray) {
-		return new Promise((res, rej) => {
-			this.connection.beginTransaction(err => {
-				if (err) rej(err)
-				queryArray.map(async query => await this.query(query, true))
-
-				this.connection.commit(err => {
-					if (err) this.rollback(err)
-					res('success')
-				})
-			})
-		})
+		try {
+			await this.beginTransaction()
+			for await (const query of queryArray) {
+				try {
+					this.query(query)
+				} catch (err) {
+					this.rollback()
+					throw err
+				}
+			}
+			await this.commit()
+		} catch (err) {
+			this.rollback()
+			throw err
+		}
 	}
 }
 
