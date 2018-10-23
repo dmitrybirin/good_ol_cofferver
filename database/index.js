@@ -9,7 +9,7 @@ class Database {
 
 		this.connection.connect(async err => {
 			let count = 0
-			while (err && count < attempts) {
+			while (err && count < this.attempts) {
 				count++
 				console.error('error connecting: ' + err.stack)
 				console.log('Waiting... ', +new Date())
