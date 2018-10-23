@@ -1,19 +1,19 @@
 const db = require('./index')
 
-const addCoffee = async coffee => {
+const addCup = async cup => {
 	// this is MADNESS
-	const keys = Object.keys(coffee.wheel)
+	const keys = Object.keys(cup.wheel)
 		.map(taste => taste.replace('/', '_').replace(' ', '_'))
 		.join(', ')
-	const values = Object.values(coffee.wheel).join(', ')
+	const values = Object.values(cup.wheel).join(', ')
 
 	await db.use('coffee')
 
 	const res = await db.transaction([
 		`INSERT INTO wheels (${keys}) VALUES (${values});`,
-		`INSERT INTO cups (title, timestamp, description, wheel_id) VALUES (${
-			coffee.cup.title ? coffee.cup.title : "''"
-		}, '${coffee.cup.timestamp}','',LAST_INSERT_ID());`,
+		`INSERT INTO cups (title, timestamp, description, wheel_id) VALUES ('${
+			cup.title ? cup.title : ''
+		}', '${cup.timestamp}', '', LAST_INSERT_ID());`,
 	])
 }
 
@@ -23,6 +23,6 @@ const getCupList = async () => {
 }
 
 module.exports = {
-	addCoffee,
+	addCup,
 	getCupList,
 }

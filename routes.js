@@ -30,7 +30,7 @@ router
 	})
 	.post('/coffee', async ctx => {
 		try {
-			await coffee.addCoffee(ctx.request.body)
+			await coffee.addCup(ctx.request.body)
 			ctx.status = 204
 			ctx.body = {
 				status: 'ok',
