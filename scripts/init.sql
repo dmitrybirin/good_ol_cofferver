@@ -31,3 +31,8 @@ CREATE TABLE IF NOT EXISTS cups (
     PRIMARY KEY (id),
     FOREIGN KEY(wheel_id) REFERENCES wheels(id)
 )  ENGINE=INNODB;
+
+CREATE USER 'test'@'%' IDENTIFIED BY 'testdev';
+GRANT SELECT, UPDATE, INSERT, DELETE ON coffee.* TO 'test'@'%';
+
+FLUSH PRIVILEGES;
