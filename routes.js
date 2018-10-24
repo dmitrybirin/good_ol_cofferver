@@ -32,10 +32,6 @@ router
 		try {
 			await coffee.addCup(ctx.request.body)
 			ctx.status = 204
-			ctx.body = {
-				status: 'ok',
-				data: `I'm ok`,
-			}
 		} catch (err) {
 			ctx.status = err.statusCode || err.status || 500
 			ctx.body = {
