@@ -5,6 +5,8 @@ const router = new Router()
 const { jwtError, checkJwt } = require('./middlewares/jwt')
 const coffee = require('./database/coffee')
 
+const getIdFromJwt = ctx => ctx.state && ctx.state.user && ctx.state.user.sub.split('|')[1]
+
 router
 	.use(jwtError)
 	.use(checkJwt)
@@ -17,7 +19,7 @@ router
 	})
 	.get('/coffee', async ctx => {
 		try {
-			const result = await coffee.getCupList(ctx.request.query.id)
+			const result = await coffee.getCupList(getIdFromJwt(ctx))
 			ctx.status = 200
 			ctx.body = {
 				status: 'ok',
@@ -33,7 +35,7 @@ router
 	})
 	.post('/coffee', async ctx => {
 		try {
-			await coffee.addCup(ctx.request.body)
+			await coffee.addCup({ id: getIdFromJwt(ctx), cup: ctx.request.body })
 			ctx.status = 204
 		} catch (err) {
 			ctx.status = err.statusCode || err.status || 500
