@@ -27,9 +27,11 @@ const addCup = async cup => {
 	])
 }
 
-const getCupList = async () => {
+const getCupList = async authId => {
 	const res = await db.query(`
-		SELECT id, title, timestamp, description FROM coffee.cups 
+		SELECT cp.id, title, timestamp, description FROM coffee.cups cp
+		INNER JOIN coffee.users cu ON cp.user_id=cu.id 
+		WHERE cu.auth_id='${authId}'
 		`)
 	return res
 }

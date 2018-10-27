@@ -14,7 +14,7 @@ router
 	})
 	.get('/coffee', async ctx => {
 		try {
-			const result = await coffee.getCupList()
+			const result = await coffee.getCupList(ctx.request.query.id)
 			ctx.status = 200
 			ctx.body = {
 				status: 'ok',
