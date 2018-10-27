@@ -22,14 +22,22 @@ CREATE TABLE IF NOT EXISTS wheels (
     PRIMARY KEY (id)
 )  ENGINE=INNODB;
 
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT,
+    auth_id VARCHAR(24) NOT NULL,
+    PRIMARY KEY (id)
+)  ENGINE=INNODB;
+
 CREATE TABLE IF NOT EXISTS cups (
     id INT AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
     timestamp TIMESTAMP,
     description TEXT,
     wheel_id INT,
+    user_id INT,
     PRIMARY KEY (id),
-    FOREIGN KEY(wheel_id) REFERENCES wheels(id)
+    FOREIGN KEY(wheel_id) REFERENCES wheels(id),
+    FOREIGN KEY(user_id) REFERENCES users(id)
 )  ENGINE=INNODB;
 
 CREATE USER 'test'@'%' IDENTIFIED BY 'testdev';
