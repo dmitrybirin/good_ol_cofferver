@@ -2,9 +2,12 @@ const Router = require('koa-router')
 
 const router = new Router()
 
+const { jwtError, checkJwt } = require('./middlewares/jwt')
 const coffee = require('./database/coffee')
 
 router
+	.use(jwtError)
+	.use(checkJwt)
 	.get('/health', async ctx => {
 		ctx.status = 200
 		ctx.body = {
