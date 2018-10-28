@@ -8,15 +8,15 @@ const coffee = require('./database/coffee')
 const getIdFromJwt = ctx => ctx.state && ctx.state.user && ctx.state.user.sub.split('|')[1]
 
 router
+    .get('/health', async ctx => {
+        ctx.status = 200
+        ctx.body = {
+            status: 'ok',
+            data: `I'm ok`,
+        }
+    })
 	.use(jwtError)
 	.use(checkJwt)
-	.get('/health', async ctx => {
-		ctx.status = 200
-		ctx.body = {
-			status: 'ok',
-			data: `I'm ok`,
-		}
-	})
 	.get('/coffee', async ctx => {
 		try {
 			const result = await coffee.getCupList(getIdFromJwt(ctx))
