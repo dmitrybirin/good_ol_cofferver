@@ -7,7 +7,7 @@ services:
       - "443:443"
     volumes:
       - ./nginx/ngnix.conf:/etc/nginx/conf.d/default.conf
-      - /etc/nginx/logs/:/var/log/
+      - /etc/nginx/logs/:/etc/nginx/
       - /docker-volumes/etc/letsencrypt/live/api.coffeewheel.xyz/fullchain.pem:/etc/letsencrypt/live/api.coffeewheel.xyz/fullchain.pem
       - /docker-volumes/etc/letsencrypt/live/api.coffeewheel.xyz/privkey.pem:/etc/letsencrypt/live/api.coffeewheel.xyz/privkey.pem      
     depends_on:
