@@ -1,5 +1,13 @@
 version: "3.3"
 services:
+  nginx:
+    image: nginx:1.15.5-alpine
+    ports:
+      - "8000:80"
+    volumes:
+      - ./nginx/ngnix.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - cofferver
   mysql:
     image: mysql:5.7.23
     ports:
@@ -18,7 +26,7 @@ services:
     volumes:
       - ./:/app
     working_dir: "/app"
-    command: "yarn dev"
+    command: "yarn nodemon index.js"
     depends_on: 
       - mysql
     environment:
