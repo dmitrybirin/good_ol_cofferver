@@ -39,5 +39,5 @@ services:
       - DB_PASS=01AekDHow5SXqFGa8KF6Jg5
       - ORIGIN=https://coffeewheel.xyz
 
-      volumes:
+volumes:
   coffeedata:
