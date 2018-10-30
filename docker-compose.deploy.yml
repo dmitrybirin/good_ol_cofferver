@@ -20,9 +20,7 @@ services:
     volumes:
       - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
-      - MYSQL_ROOT_PASSWORD=dev
-      - MYSQL_USER=test
-      - MYSQL_PASSWORD=testdev
+      - MYSQL_ROOT_PASSWORD=uFa91AomUbnDgH7GsclFBXU
 
   cofferver:
     image: node:10.12.0-alpine
@@ -36,6 +34,6 @@ services:
       - mysql
     environment:
       - DB_HOST=mysql
-      - DB_USER=test
-      - DB_PASS=testdev
+      - DB_USER=coffee
+      - DB_PASS=01AekDHow5SXqFGa8KF6Jg5
       - ORIGIN=https://coffeewheel.xyz
