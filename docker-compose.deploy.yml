@@ -23,13 +23,13 @@ services:
       - MYSQL_ROOT_PASSWORD=uFa91AomUbnDgH7GsclFBXU
 
   cofferver:
-    image: node:10.12.0-alpine
+    image: keymetrics/pm2:latest-alpine
     ports:
       - "3000:3000"
     volumes:
       - ./:/app
     working_dir: "/app"
-    command: "yarn nodemon index.js"
+    command: "pm2-runtime ecosystem.config.js"
     depends_on: 
       - mysql
     environment:
