@@ -22,8 +22,6 @@ services:
       - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       - MYSQL_ROOT_PASSWORD=uFa91AomUbnDgH7GsclFBXU
-volumes:
-  coffeedata:
 
   cofferver:
     image: keymetrics/pm2:latest-alpine
@@ -40,3 +38,6 @@ volumes:
       - DB_USER=coffee
       - DB_PASS=01AekDHow5SXqFGa8KF6Jg5
       - ORIGIN=https://coffeewheel.xyz
+
+      volumes:
+  coffeedata:
