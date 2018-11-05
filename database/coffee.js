@@ -24,7 +24,7 @@ const addCup = async ({ id, cup }) => {
 			`INSERT INTO wheels (${keys}) VALUES (${values});`,
 			`INSERT INTO cups (title, timestamp, description, wheel_id, user_id) VALUES ('${
 				cup.title ? cup.title : ''
-			}', '${cup.timestamp}', '', LAST_INSERT_ID(), ${userId});`,
+			}', '${cup.timestamp}', '${cup.description || ''}', LAST_INSERT_ID(), ${userId});`,
 		])
 	} else {
 		throw new Error('user id is undefined')
